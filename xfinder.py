@@ -30,7 +30,7 @@ def option1():
 	url = input('\033[1;96m'" Enter Website =====> "'\033[1;92m')
 	print ("\033[1;96m")
 
-	passee = str(urlopen("https://raw.githubusercontent.com/0xred/shellname/main/adminpanel.txt").read(), 'utf-8')
+	passee = str(urlopen("https://raw.githubusercontent.com/0xred/xfinder/main/adminpanel.txt").read(), 'utf-8')
 	for i in passee.split('\n'):
 		curll = url+i
 		try :
@@ -46,7 +46,7 @@ def option2():
 	url = input('\033[1;96m'" Enter Website =====> "'\033[1;92m')
 
 	print ("\033[1;96m")
-	passe = str(urlopen("https://raw.githubusercontent.com/0xred/shellname/main/shellname.txt").read(), 'utf-8')
+	passe = str(urlopen("https://raw.githubusercontent.com/0xred/xfinder/main/shellname.txt").read(), 'utf-8')
 	for ss in passe.split('\n'):
 		curl = url+ss
 		try :
