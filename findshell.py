@@ -1,19 +1,17 @@
+from tkinter import *
+from tkinter import ttk
+import tkinter
+from tkinter.ttk import Progressbar
 import concurrent.futures
 import urllib.request
-import sys,os
-import pyfiglet
-from colorama import Fore, Back, Style
-#############################################
-os.system('cls' if os.name == 'nt' else 'clear')
-os.system("color B")
-ascii_banner = pyfiglet.figlet_format(" X Finder v2")
-print(ascii_banner)
-print(" \033[0;93m-------------------------------------------------------------------------------------------")
-print("  Warning : Your Most Add http or https .. and add / in last link exmple https://example.com/ ")
-print(" -------------------------------------------------------------------------------------------")
-#############################################
-
-xxurl = input('\033[1;96m'" Enter Website =====> "'\033[1;92m')
+####################################################
+# window apps option .. like size name in title color background
+root = Tk()
+root.geometry("649x480")
+root.title(" Find a Fucking Shell ")
+root.configure(bg='black') # bg is mean background 
+root.resizable(width=False, height=False) # No resize
+####################################################
 URLS = ['WSO.php',
         'dz.php',
         'mailer.php',
@@ -1315,20 +1313,44 @@ URLS = ['WSO.php',
         '11.php',
         '1234.php',]
 def load_url(url, timeout):
-    xgg = xxurl + url
-    with urllib.request.urlopen(xgg, timeout=timeout) as conn:
-        return conn.read()
-        
-with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-    future_to_url = {executor.submit(load_url, url, 60): url for url in URLS}
-    for future in concurrent.futures.as_completed(future_to_url):
-        url = future_to_url[future]
-        try:
-            data = future.result()
-        except Exception as exc:
-            print('\033[1;91m Not Found \033[1;96m<====> \033[1;91m  %s \033[1;96m' % (url))
-        else:
-            print('\033[1;92m   Found   \033[1;96m<====> \033[1;92m %s \033[1;96m' % (url))
+        xxurl = inputtxt.get("1.0", "end-1c")
+        xgg = xxurl + url
+        with urllib.request.urlopen(xgg, timeout=timeout) as conn:
+            return conn.read()
+def nice():    
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+        future_to_url = {executor.submit(load_url, url, 60): url for url in URLS}
+        for future in concurrent.futures.as_completed(future_to_url):
+            url = future_to_url[future]
+            try:
+                data = future.result()
+            except Exception as exc:
+                Output1.insert(url+'\n')
+            else:
+                Output2.insert(END, url+'\n')
+####################################################
+# Output ...
+Output1 = Listbox(root,height = 25,width = 40,bg="#212121",fg="white")
+Output1.grid(row=1, column=1,columnspan=2, sticky="nsew")
+####################################################
+# Output ...
+Output2 = Listbox(root,height = 25,width = 20,bg="#212121",fg="white")
+Output2.grid(row=1, column=3,columnspan=4, sticky="nsew")
+####################################################
+xbar = Progressbar()
+xbar.grid(row=2, column=1,columnspan=6, sticky="nsew")
+####################################################
+# Label ...   it is LOGO bro :)
+l1 = Label(text = "add url",font=("Courier", 11))
+l1.grid(row=3, column=1,columnspan=2, sticky="nsew")
+####################################################
+# input ...
+inputtxt = Text(root, height = 1,width = 50,foreground="black",bg = "#f0f0f0")
+inputtxt.grid(row=3, column=4,columnspan=3, sticky="nsew")
+####################################################
+# Button Search ... 
+Display = Button(root, height = 1,width = 10, text ="Search",bg = "#228E5D",fg= "white",font=("Courier", 14),command=lambda:nice())
+Display.grid(row=5,column=1,columnspan=6, sticky="nesw")
+####################################################
 
-
-            
+root.mainloop()
