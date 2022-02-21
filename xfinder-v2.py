@@ -2,6 +2,9 @@ import concurrent.futures
 import urllib.request
 import sys,os
 import pyfiglet
+import colorama
+from colorama import init
+init()
 from colorama import Fore, Back, Style
 #############################################
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -12,8 +15,10 @@ print(" \033[0;93m--------------------------------------------------------------
 print("  Warning : Your Most Add http or https .. and add / in last link exmple https://example.com/ ")
 print(" -------------------------------------------------------------------------------------------")
 #############################################
-
+xcount = 0
 xxurl = input('\033[1;96m'" Enter Website =====> "'\033[1;92m')
+print(" \033[0;93m-------------------------------------------------------------------------------------------")
+
 URLS = ['WSO.php',
         'dz.php',
         'mailer.php',
@@ -1322,11 +1327,11 @@ def load_url(url, timeout):
 with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
     future_to_url = {executor.submit(load_url, url, 60): url for url in URLS}
     for future in concurrent.futures.as_completed(future_to_url):
+        xcount += 1
         url = future_to_url[future]
         try:
             data = future.result()
         except Exception as exc:
-            print('\033[1;91m Not Found \033[1;96m<====> \033[1;91m  %s \033[1;96m' % (url))
+            print('\033[1;91m   Not Found   %s : 1300 \033[1;96m' % (xcount), end='\r')
         else:
-            print('\033[1;92m   Found   \033[1;96m<====> \033[1;92m %s \033[1;96m' % (url))
-
+            print('\033[1;92m   Found   \033[1;96m<=========> \033[1;92m %s \033[1;96m' % (url))
